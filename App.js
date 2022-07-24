@@ -12,6 +12,7 @@ export default function App() {
   const[isLogin,setIsLogin] =useState(false)
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
+  const [department,setDepartment] = useState('')
   console.log(email,password)
   return (
     // <View >
@@ -30,8 +31,8 @@ export default function App() {
     //   {/* <Tabs/> */}
     // </View>
     <>
-    {isLogin? <Tabs email={email}  password={password} /> :
-<Login email={email} setEmail={setEmail} password={password} setPassword={setPassword} setIsLogin={setIsLogin}/>
+    {isLogin? <Tabs email={email}  password={password} department={department} setIsLogin={setIsLogin}/> :
+<Login email={email} setEmail={setEmail} password={password} setPassword={setPassword} setIsLogin={setIsLogin} setDepartment={setDepartment}/>
 
 
     }

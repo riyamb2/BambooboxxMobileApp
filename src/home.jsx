@@ -36,14 +36,15 @@ const Home = (props) => {
   }
   const [cardsData,setCardsData] = useState([])
   const fetchingCards =async()=>{
+    console.log("response email",props.email,props.password);
     const response = await fetch("https://mobile-app-b2.herokuapp.com/card",{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
       },
       body:JSON.stringify({
-        "email":props.email||"aditya@bamboobox.ai",
-        "password":props.email||"aditya@1234",
+        "email":props.email,
+        "password":props.password
         
     })
     })
@@ -72,7 +73,7 @@ React.useEffect(()=>{
       source={require('../HeaderTest/assets/favicon.png')}
 
     /> */}
-    <Logo style={{marginLeft:5}}/>
+    <Logo style={{marginLeft:5}} onPress={()=>props.setIsLogin(false)}/>
     {/* <Text >Home</Text> */}
 
     {/* <FunnelScreen/> */}
@@ -93,7 +94,7 @@ React.useEffect(()=>{
         </IconButton>
         {notification.map((ele,index)=>{
           return(
-          <ListItem key={index} title={ele}/>)
+          <ListItem  key={index} title={ele}/>)
         })}
 </NativeBaseProvider>
         </View>
@@ -120,9 +121,9 @@ React.useEffect(()=>{
         onRefresh={()=>pullMe()}
       />}
   >
-    {cardsData.map(ele=>{
+    {cardsData.map((ele,index)=>{
       return(
-        <Cards key={ele.cardNo} email={props.email} password={props.password} cardNo={ele.cardNo} acc={ele.acc} description={ele?.cardDescription}/>
+        <Cards key={index} email={props.email} password={props.password} cardNo={ele.cardNo} acc={ele.acc} description={ele?.cardDescription} department = {props.department}/>
       )
     })}
   </ScrollView>

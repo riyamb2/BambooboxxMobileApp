@@ -10,13 +10,13 @@ const Tabs = (props) => {
   return (
    <NavigationContainer>
       <Tab.Navigator labeled={false} barStyle={{ backgroundColor: 'black' }} screenOptions={{ headerShown: false }} >
-        <Tab.Screen name='Insights'  children={()=><Home email={props.email} password={props.password} />}  options={{
+        <Tab.Screen name='Insights'  children={()=><Home email={props.email} password={props.password} department = {props.department} setIsLogin={props.setIsLogin} />}  options={{
                     tabBarIcon: () => (<Image source={require("../assets/insights.png")} style={{width: 25, height: 25}} />)
                 }}/>
-        <Tab.Screen name='Funnel' children={()=><FunnelScreen email={props.email} password={props.password} />}  options={{
+        <Tab.Screen name='Funnel' children={()=><FunnelScreen email={props.email} password={props.password} setIsLogin={props.setIsLogin}/>}  options={{
                     tabBarIcon: () => (<Image source={require("../assets/funnel.png")} style={{width: 25, height: 25}} />)
                 }}/>
-        <Tab.Screen name='Tasks Summary' children={()=><TaskManager email={props.email} password={props.password} />} options={{
+        <Tab.Screen name='Tasks Summary' children={()=><TaskManager email={props.email} password={props.password} department = {props.department} setIsLogin={props.setIsLogin} />} options={{
                     tabBarIcon: () => (<Image source={require("../assets/taskSummary.jpg")} style={{width: 25, height: 25}} />)
                 }}/>
       </Tab.Navigator>

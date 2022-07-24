@@ -7,8 +7,31 @@ import SelectList from 'react-native-dropdown-select-list'
 const CreateSignIn = (props) => {
     const data = [{key:'1',value:'Inside Sale Executive'},{key:'2',value:'Field Sale Executive'}];
     const [selectItem,setSelectItem]= useState("");
-    const createButtonClick =()=>{
-      props.openCreateScreen(false)
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+    const [department,setDepartment] = useState('');
+    const [name,setName] = useState('')
+    const createButtonClick =async()=>{
+      const body = {
+        "name":name,
+        "email":email,
+        "password":password,
+        "department": "B"
+      }
+      console.log("sign up here",body)
+      const response = await fetch("https://mobile-app-b2.herokuapp.com/user/signup",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(body)
+      })
+      const res = await response.json()
+
+      if(res?.success){
+        props.openCreateScreen(false)
+      }
+      else alert("creation failed try again")
     }
   return (
     <View style={styles.container}>
@@ -21,6 +44,7 @@ const CreateSignIn = (props) => {
           style={styles.TextInput}
           placeholder="Full Name"
           placeholderTextColor="#003f5c"
+          onChangeText={txt=>setName(txt)}
         />
 </View>
 
@@ -30,6 +54,8 @@ const CreateSignIn = (props) => {
           style={styles.TextInput}
           placeholder="Email"
           placeholderTextColor="#003f5c"
+          onChangeText={txt=>setEmail(txt)}
+
         />
         </View>
         <View style={styles.inputView}>
@@ -39,6 +65,8 @@ const CreateSignIn = (props) => {
           placeholder="Password"
           placeholderTextColor="#003f5c"
           secureTextEntry={true}
+          onChangeText={txt=>setPassword(txt)}
+
         />
         
         </View>
@@ -48,6 +76,7 @@ const CreateSignIn = (props) => {
           data={data}
             setSelected={setSelectItem}
             placeholder={"Select Department"}
+
             />
             </View>
             

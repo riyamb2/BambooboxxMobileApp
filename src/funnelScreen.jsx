@@ -13,7 +13,7 @@ import {Picker} from '@react-native-picker/picker';
 // DateTimePickerAndroid.dismiss(mode: AndroidNativeProps['mode'])
 
 
-export default function FunnelScreen() {
+export default function FunnelScreen(props) {
 const [state,setState] = useState({date:"2016-05-15"})
   const [values, setValues] = useState([33,44,66,44,43,21])
   const [delta,SetDelta] = useState([22,-14,29,-23,4,-49])
@@ -46,7 +46,7 @@ const [state,setState] = useState({date:"2016-05-15"})
   }
     return (
       <View style={styles.container}>
-        <Header/>
+        <Header setIsLogin={props.setIsLogin}/>
       <View style={styles.container}>
 
         {/* <Text style={styles.heading}>

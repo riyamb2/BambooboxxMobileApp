@@ -6,7 +6,7 @@ import { Stack, Switch,ListItem } from "@react-native-material/core";
 import Header from "./header";
 
 
-const TaskManager = () => {
+const TaskManager = (props) => {
     const [alignment, setAlignment] = useState('Assigned');
     const [assigned, setAssigned] = useState([])
     const [completed, setCompleted] = useState([])
@@ -21,10 +21,10 @@ const [refresh, setRefresh] = useState(false)
         //     setRefresh(false)
         // }, 4000);
     }
-    function getData (props){
+    function getData (){
       const body = {
-          email: props.email||'aditya@bamboobox.ai',
-          password: props.email||'aditya@1234'
+          email: props.email,
+          password: props.password
       }
       fetch('https://mobile-app-b2.herokuapp.com/task/all', {
           method: 'POST',
@@ -115,7 +115,7 @@ const [refresh, setRefresh] = useState(false)
   };
     return (
         <>
-        <Header/>
+        <Header setIsLogin={props.setIsLogin}/>
       <ScrollView 
       refreshControl={<RefreshControl
         refreshing={refresh}
@@ -124,6 +124,8 @@ const [refresh, setRefresh] = useState(false)
       style={{margin:"3%" }}>
         {/* <Text>hello</Text> */}
         <View>
+            {
+                props?.department =='A'&&
         < StackedBarChart
                 data={chartData}
                 withDots={false}
@@ -153,6 +155,7 @@ const [refresh, setRefresh] = useState(false)
                 }}
                 hideLegend={false}
             />
+            }
             </View>
             <View style={{flexDirection:"row",margin:15,marginLeft:100,alignItems:"center"}}>
                 <Text >Assigned</Text>
@@ -166,11 +169,11 @@ const [refresh, setRefresh] = useState(false)
     </View>
     
 <ScrollView  >
-    { alignment === 'Assigned' ? assigned.map((ele,idx) => {
+    { alignment === 'Assigned' ? assigned?.filter(ele=>{if(ele) {return ele}})?.map((ele,idx) => {
                     return(
                       <ListItem key={idx} title={ele} />
                     )
-                }): completed?.map((ele, idx) => {
+                }): completed?.filter(ele=>{if(ele) {return ele}})?.map((ele, idx) => {
                     return(
                       <ListItem key={idx} title={ele} style={{width:100}} />
 

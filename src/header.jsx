@@ -13,7 +13,7 @@ import { CloseIcon, IconButton, NativeBaseProvider } from 'native-base';
 import Modal from "react-native-modal";
 import { Stack, Switch,ListItem } from "@react-native-material/core";
 
-const Header = () => {
+const Header = (props) => {
   const [showPopover, setShowPopover] = useState(false);
   const [notification,setNotification] = useState([
     "Congratulations!...Alex completed the assigned task","Update!...Marc has closed the assigned task with a note",
@@ -35,7 +35,7 @@ const Header = () => {
       source={require('../HeaderTest/assets/favicon.png')}
 
     /> */}
-    <Logo style={{marginLeft:5}}/>
+    <Logo style={{marginLeft:5}} onPress={()=>props.setIsLogin(false)}/>
     {/* <Text >Home</Text> */}
 
     {/* <FunnelScreen/> */}

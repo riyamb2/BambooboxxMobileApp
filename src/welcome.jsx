@@ -13,7 +13,7 @@ export default Welcome
 
 const styles = StyleSheet.create({
     welcome:{
-        fontSize:32,
+        fontSize:24,
         alignItems:"center",
         justifyContent:"center",
         flex:1,
@@ -22,11 +22,11 @@ const styles = StyleSheet.create({
     },
     welcomeText:{
         fontFamily:"sans-serif",
-        fontSize:45,
+        fontSize:24,
         textAlign:"center",
         color:"#FFFFFF",
         fontWeight:"300",
-        lineHeight:100
+        lineHeight:50
         
         
     }

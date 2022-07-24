@@ -11,12 +11,28 @@ const login = (props) => {
     const [openCreateScreen,SetOPenCreateScreen] = useState(false)
 
     const openCreateAccount = ()=>{
+      
       SetOPenCreateScreen(!openCreateScreen)
       console.log("hlll..",openCreateScreen)
     }
     // if(openCreateAccount === true) {return )}
-    const signInButton = ()=>{
-      props.setIsLogin(true)
+    const signInButton = async()=>{
+      const response = await fetch("https://mobile-app-b2.herokuapp.com/user/login",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          "email":props.email,
+          "password":props.password,
+        })
+      })
+      const res = await response.json()
+      if(res?.success){
+        props.setDepartment(res.department)
+        props.setIsLogin(true)
+      }
+      else alert("Login failed please try again")
     }
   return (
     <>
